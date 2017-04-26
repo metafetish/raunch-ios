@@ -1,5 +1,5 @@
 //
-//  BCD.swift
+//  SimpleBCD.swift
 //  Raunch
 //
 //  Created by Blackboxed on 2017-04-26.
