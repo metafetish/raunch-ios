@@ -7,11 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C161C831EB0E1E400F4781E /* SimpleBCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C161C821EB0E1E400F4781E /* SimpleBCD.swift */; };
+		9C161C8B1EB0E94500F4781E /* SimpleBCDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C161C8A1EB0E94500F4781E /* SimpleBCDTests.swift */; };
+		9C161C8D1EB0E94500F4781E /* Raunch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CAFA3D41EB0D5C500B63BE7 /* Raunch.framework */; };
 		9CAFA3D91EB0D5C500B63BE7 /* Raunch.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CAFA3D71EB0D5C500B63BE7 /* Raunch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CAFA3E11EB0D5FF00B63BE7 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CAFA3E01EB0D5FF00B63BE7 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9C161C8E1EB0E94500F4781E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CAFA3CB1EB0D5C500B63BE7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9CAFA3D31EB0D5C500B63BE7;
+			remoteInfo = Raunch;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		9C161C821EB0E1E400F4781E /* SimpleBCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleBCD.swift; sourceTree = "<group>"; };
+		9C161C881EB0E94500F4781E /* RaunchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RaunchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C161C8A1EB0E94500F4781E /* SimpleBCDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBCDTests.swift; sourceTree = "<group>"; };
+		9C161C8C1EB0E94500F4781E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CAFA3D41EB0D5C500B63BE7 /* Raunch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Raunch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CAFA3D71EB0D5C500B63BE7 /* Raunch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Raunch.h; sourceTree = "<group>"; };
 		9CAFA3D81EB0D5C500B63BE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -19,6 +36,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9C161C851EB0E94500F4781E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C161C8D1EB0E94500F4781E /* Raunch.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9CAFA3D01EB0D5C500B63BE7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -30,10 +55,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9C161C891EB0E94500F4781E /* RaunchTests */ = {
+			isa = PBXGroup;
+			children = (
+				9C161C8A1EB0E94500F4781E /* SimpleBCDTests.swift */,
+				9C161C8C1EB0E94500F4781E /* Info.plist */,
+			);
+			path = RaunchTests;
+			sourceTree = "<group>";
+		};
 		9CAFA3CA1EB0D5C500B63BE7 = {
 			isa = PBXGroup;
 			children = (
 				9CAFA3D61EB0D5C500B63BE7 /* Raunch */,
+				9C161C891EB0E94500F4781E /* RaunchTests */,
 				9CAFA3D51EB0D5C500B63BE7 /* Products */,
 				9CAFA3DF1EB0D5FF00B63BE7 /* Frameworks */,
 			);
@@ -43,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				9CAFA3D41EB0D5C500B63BE7 /* Raunch.framework */,
+				9C161C881EB0E94500F4781E /* RaunchTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -50,6 +86,7 @@
 		9CAFA3D61EB0D5C500B63BE7 /* Raunch */ = {
 			isa = PBXGroup;
 			children = (
+				9C161C821EB0E1E400F4781E /* SimpleBCD.swift */,
 				9CAFA3E21EB0D60500B63BE7 /* Supporting files */,
 			);
 			path = Raunch;
@@ -86,6 +123,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		9C161C871EB0E94500F4781E /* RaunchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C161C901EB0E94500F4781E /* Build configuration list for PBXNativeTarget "RaunchTests" */;
+			buildPhases = (
+				9C161C841EB0E94500F4781E /* Sources */,
+				9C161C851EB0E94500F4781E /* Frameworks */,
+				9C161C861EB0E94500F4781E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C161C8F1EB0E94500F4781E /* PBXTargetDependency */,
+			);
+			name = RaunchTests;
+			productName = RaunchTests;
+			productReference = 9C161C881EB0E94500F4781E /* RaunchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		9CAFA3D31EB0D5C500B63BE7 /* Raunch */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9CAFA3DC1EB0D5C500B63BE7 /* Build configuration list for PBXNativeTarget "Raunch" */;
@@ -110,11 +165,17 @@
 		9CAFA3CB1EB0D5C500B63BE7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Metafetish;
 				TargetAttributes = {
+					9C161C871EB0E94500F4781E = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+					};
 					9CAFA3D31EB0D5C500B63BE7 = {
 						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -132,11 +193,19 @@
 			projectRoot = "";
 			targets = (
 				9CAFA3D31EB0D5C500B63BE7 /* Raunch */,
+				9C161C871EB0E94500F4781E /* RaunchTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9C161C861EB0E94500F4781E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9CAFA3D21EB0D5C500B63BE7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -147,16 +216,55 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9C161C841EB0E94500F4781E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C161C8B1EB0E94500F4781E /* SimpleBCDTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9CAFA3CF1EB0D5C500B63BE7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C161C831EB0E1E400F4781E /* SimpleBCD.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		9C161C8F1EB0E94500F4781E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9CAFA3D31EB0D5C500B63BE7 /* Raunch */;
+			targetProxy = 9C161C8E1EB0E94500F4781E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		9C161C911EB0E94500F4781E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = RaunchTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.metafetish.RaunchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		9C161C921EB0E94500F4781E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = RaunchTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.metafetish.RaunchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		9CAFA3DA1EB0D5C500B63BE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -261,6 +369,7 @@
 		9CAFA3DD1EB0D5C500B63BE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -273,6 +382,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.metafetish.Raunch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -280,6 +390,7 @@
 		9CAFA3DE1EB0D5C500B63BE7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -299,6 +410,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9C161C901EB0E94500F4781E /* Build configuration list for PBXNativeTarget "RaunchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C161C911EB0E94500F4781E /* Debug */,
+				9C161C921EB0E94500F4781E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		9CAFA3CE1EB0D5C500B63BE7 /* Build configuration list for PBXProject "Raunch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -315,6 +434,7 @@
 				9CAFA3DE1EB0D5C500B63BE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

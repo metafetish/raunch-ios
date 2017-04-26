@@ -1,0 +1,5 @@
+include:
+    - "Raunch"
+
+except:
+    - trailing-whitespace
