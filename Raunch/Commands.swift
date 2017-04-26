@@ -8,13 +8,13 @@
 
 import Foundation
 
-/// A command to send to the Launch.
+/// A command to send to the toy.
 struct Command {
     
     private let position: UInt8
     private var speed: UInt8
     
-    /// Creates a command to send to the Launch.
+    /// Creates a command to send to the toy.
     /// - Parameter position: The desired position of the toy. Valid values are 0-99.
     /// - Parameter speed: The speed at which the toy should move. Valid values are 0-99.
     init(position: Int, speed: Int) throws {
