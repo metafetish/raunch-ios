@@ -10,6 +10,9 @@
 		9C161C831EB0E1E400F4781E /* SimpleBCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C161C821EB0E1E400F4781E /* SimpleBCD.swift */; };
 		9C161C8B1EB0E94500F4781E /* SimpleBCDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C161C8A1EB0E94500F4781E /* SimpleBCDTests.swift */; };
 		9C161C8D1EB0E94500F4781E /* Raunch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CAFA3D41EB0D5C500B63BE7 /* Raunch.framework */; };
+		9C7088151EB0F98A003A1D89 /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7088141EB0F98A003A1D89 /* Commands.swift */; };
+		9C7088171EB0FAA2003A1D89 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7088161EB0FAA2003A1D89 /* Errors.swift */; };
+		9C7088191EB0FD51003A1D89 /* CommandsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7088181EB0FD51003A1D89 /* CommandsTests.swift */; };
 		9CAFA3D91EB0D5C500B63BE7 /* Raunch.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CAFA3D71EB0D5C500B63BE7 /* Raunch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CAFA3E11EB0D5FF00B63BE7 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CAFA3E01EB0D5FF00B63BE7 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
@@ -29,6 +32,9 @@
 		9C161C881EB0E94500F4781E /* RaunchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RaunchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C161C8A1EB0E94500F4781E /* SimpleBCDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBCDTests.swift; sourceTree = "<group>"; };
 		9C161C8C1EB0E94500F4781E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C7088141EB0F98A003A1D89 /* Commands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
+		9C7088161EB0FAA2003A1D89 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		9C7088181EB0FD51003A1D89 /* CommandsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandsTests.swift; sourceTree = "<group>"; };
 		9CAFA3D41EB0D5C500B63BE7 /* Raunch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Raunch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CAFA3D71EB0D5C500B63BE7 /* Raunch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Raunch.h; sourceTree = "<group>"; };
 		9CAFA3D81EB0D5C500B63BE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				9C161C8A1EB0E94500F4781E /* SimpleBCDTests.swift */,
+				9C7088181EB0FD51003A1D89 /* CommandsTests.swift */,
 				9C161C8C1EB0E94500F4781E /* Info.plist */,
 			);
 			path = RaunchTests;
@@ -86,6 +93,8 @@
 		9CAFA3D61EB0D5C500B63BE7 /* Raunch */ = {
 			isa = PBXGroup;
 			children = (
+				9C7088161EB0FAA2003A1D89 /* Errors.swift */,
+				9C7088141EB0F98A003A1D89 /* Commands.swift */,
 				9C161C821EB0E1E400F4781E /* SimpleBCD.swift */,
 				9CAFA3E21EB0D60500B63BE7 /* Supporting files */,
 			);
@@ -221,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C161C8B1EB0E94500F4781E /* SimpleBCDTests.swift in Sources */,
+				9C7088191EB0FD51003A1D89 /* CommandsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +239,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C161C831EB0E1E400F4781E /* SimpleBCD.swift in Sources */,
+				9C7088171EB0FAA2003A1D89 /* Errors.swift in Sources */,
+				9C7088151EB0F98A003A1D89 /* Commands.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +429,7 @@
 				9C161C921EB0E94500F4781E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9CAFA3CE1EB0D5C500B63BE7 /* Build configuration list for PBXProject "Raunch" */ = {
 			isa = XCConfigurationList;
