@@ -1,5 +1,8 @@
 language: objective-c
 osx_image: xcode8.3
-xcode_project: Raunch.xcodeproj
-xcode_scheme: Raunch
-xcode_sdk: iphonesimulator10.3
+cache: bundler
+rvm: 2.3.1
+install:
+  - bundle install
+script:
+  - bundle exec fastlane travis
