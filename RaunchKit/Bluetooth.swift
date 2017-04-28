@@ -10,15 +10,15 @@ import os
 import Foundation
 import CoreBluetooth
 
-/// A bluetooth connectivity manager.
+/// A Bluetooth connectivity manager.
 class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
-    // UUIDs
+    // UUIDs.
     private let toyServiceUUID = CBUUID(string: "88F80580-0000-01E6-AACE-0002A5D5C51B")
     private let toyCommandsCharacteristicUUID = CBUUID(string: "88F80581-0000-01E6-AACE-0002A5D5C51B")
     private let toyStatusCharacteristicUUID = CBUUID(string: "88F80582-0000-01E6-AACE-0002A5D5C51B")
     
-    // Core Bluetooth objects
+    // Core Bluetooth objects.
     private var central: CBCentralManager!
     private var peripheral: CBPeripheral?
     private var service: CBService?
@@ -28,7 +28,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     // Is the connectivity manager active?
     private var active = true
     
-    // The identifier for the target toy
+    // The identifier for the target toy.
     private var selectedPeripheralIdentifier: UUID?
     
     // Use a private queue and a semaphore to coordinate start
@@ -36,13 +36,13 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     private var powerOnQueue: DispatchQueue? = DispatchQueue(label: "com.metafetish.raunch.connectivity")
     private var powerReady = DispatchSemaphore(value: 0)
     
-    /// Create a bluetooth connectivity manager.
+    /// Creates a Bluetooth connectivity manager.
     override init() {
         super.init()
         central = CBCentralManager(delegate: self, queue: queue)
     }
     
-    /// Start the connectivity manager and connect to the first toy that is discovered.
+    /// Starts the connectivity manager and connect to the first toy that is discovered.
     func start() {
         active = true
         if central.state == .poweredOn {
@@ -60,7 +60,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         }
     }
     
-    /// Stop the connectivity manager.
+    /// Stops the connectivity manager.
     func stop() {
         active = false
         if let peripheral = peripheral {
@@ -69,7 +69,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
    
     
-    /// Sends a command to the toy
+    /// Sends a command to the toy.
     func send(_ command: Command) {
         guard let peripheral = peripheral,
             let commandsCharacteristic = commandsCharacteristic else {

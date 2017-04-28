@@ -8,18 +8,18 @@
 
 import Foundation
 
-/// Control the Fleshlight Launch on iOS.
+/// 🚀 Fleshlight Launch Control 🚀
 public class Raunch {
     
-    /// A bluetooth connectivity manager.
+    /// A Bluetooth connectivity manager.
     private static let bluetooth = Bluetooth()
     
-    /// Connect and control to the first toy that is discovered.
+    /// Connects and controls the first toy that is discovered.
     public static func start() {
         bluetooth.start()
     }
     
-    /// Send the toy to a position.
+    /// Sends the toy to a position.
     /// - Parameter position: The desired position of the toy. Valid values are 0-99.
     /// - Parameter speed: The speed at which the toy should move. Valid values are 0-99.
     /// - Throws: `RaunchError.invalidPositionValue` if the position value is invalid.
