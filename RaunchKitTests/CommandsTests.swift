@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Raunch
+@testable import RaunchKit
 
 class CommandsTests: XCTestCase {
     
