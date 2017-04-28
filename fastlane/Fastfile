@@ -1,4 +1,4 @@
 desc "Perform the build steps on travis CI"
 lane :travis do
-  scan(scheme: "Raunch", device: "iPhone 7")
+  scan(scheme: "RaunchKit", device: "iPhone 7")
 end

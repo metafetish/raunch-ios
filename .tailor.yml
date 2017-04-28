@@ -1,5 +1,5 @@
 include:
-    - "Raunch"
+    - "RaunchKit"
 
 except:
     - trailing-whitespace

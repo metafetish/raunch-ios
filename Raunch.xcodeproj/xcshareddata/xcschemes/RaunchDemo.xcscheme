@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9CAFA3D31EB0D5C500B63BE7"
-               BuildableName = "Raunch.framework"
-               BlueprintName = "Raunch"
+               BlueprintIdentifier = "9C6B19A31EB166C100E21640"
+               BuildableName = "RaunchDemo.app"
+               BlueprintName = "RaunchDemo"
                ReferencedContainer = "container:Raunch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,23 +28,13 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9C161C871EB0E94500F4781E"
-               BuildableName = "RaunchTests.xctest"
-               BlueprintName = "RaunchTests"
-               ReferencedContainer = "container:Raunch.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9CAFA3D31EB0D5C500B63BE7"
-            BuildableName = "Raunch.framework"
-            BlueprintName = "Raunch"
+            BlueprintIdentifier = "9C6B19A31EB166C100E21640"
+            BuildableName = "RaunchDemo.app"
+            BlueprintName = "RaunchDemo"
             ReferencedContainer = "container:Raunch.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -61,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9CAFA3D31EB0D5C500B63BE7"
-            BuildableName = "Raunch.framework"
-            BlueprintName = "Raunch"
+            BlueprintIdentifier = "9C6B19A31EB166C100E21640"
+            BuildableName = "RaunchDemo.app"
+            BlueprintName = "RaunchDemo"
             ReferencedContainer = "container:Raunch.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -79,15 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9CAFA3D31EB0D5C500B63BE7"
-            BuildableName = "Raunch.framework"
-            BlueprintName = "Raunch"
+            BlueprintIdentifier = "9C6B19A31EB166C100E21640"
+            BuildableName = "RaunchDemo.app"
+            BlueprintName = "RaunchDemo"
             ReferencedContainer = "container:Raunch.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
