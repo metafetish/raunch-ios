@@ -152,6 +152,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         if let error = error {
             os_log("Error discovering services: %@", log: bluetooth_log, type: .error, error.localizedDescription)
+            central.cancelPeripheralConnection(peripheral)
         }
         else {
             peripheral.services?.forEach { (service) in
@@ -170,7 +171,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         if let error = error {
             os_log("Error discovering characteristics: %@", log: bluetooth_log, type: .error, error.localizedDescription)
-
+            central.cancelPeripheralConnection(peripheral)
         }
         else {
             if service.uuid == toyServiceUUID {
