@@ -11,38 +11,42 @@ import Foundation
 /// A command to send to the toy.
 struct Command {
     
+    /// The time at which to fire the command, relative to the start of a track.
+    let time: RaunchTime
+    
     /// The desired position of the toy.
     let position: Int
-    private let positionAsBCD: UInt8
     
     // The speed at which the toy should move.
     let speed: Int
-    private let speedAsBCD: UInt8
     
-    /// Creates a command to send to the toy.
+    /// Creates a timed command.
+    /// - Parameter time: The time at which to fire the command.
     /// - Parameter position: The desired position of the toy. Valid values are 0-99.
     /// - Parameter speed: The speed at which the toy should move. Valid values are 0-99.
-    init(position: Int, speed: Int) throws {
-        self.position = position
-        guard let p = position.raunch_toBCDByte() else {
+    /// - Throws: `RaunchError.invalidPositionValue` if the position value is invalid.
+    ///           `RaunchError.invalidSpeedValue` if the speed value is invalid.
+    init(time: RaunchTime, position: Int, speed: Int) throws {
+        guard position >= 0 && position <= 99 else {
             throw RaunchError.invalidPositionValue
         }
-        self.positionAsBCD = p
-
-        self.speed = speed
-        guard let s = speed.raunch_toBCDByte() else {
+        
+        guard speed >= 20 && speed <= 99 else {
             throw RaunchError.invalidSpeedValue
         }
-        self.speedAsBCD = s
+        
+        self.time = time
+        self.position = position
+        self.speed = speed
     }
     
     /// Returns the command as a two bytes packet.
     func asData() -> Data {
-        return Data(bytes: [ positionAsBCD, speedAsBCD ])
+        return Data(bytes: [ UInt8(position), UInt8(speed) ])
     }
-    
 }
 
+// Display commands as strings.
 extension Command: CustomStringConvertible {
     
     var description: String {

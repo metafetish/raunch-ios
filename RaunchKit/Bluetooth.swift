@@ -17,6 +17,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     private let toyServiceUUID = CBUUID(string: "88F80580-0000-01E6-AACE-0002A5D5C51B")
     private let toyCommandsCharacteristicUUID = CBUUID(string: "88F80581-0000-01E6-AACE-0002A5D5C51B")
     private let toyStatusCharacteristicUUID = CBUUID(string: "88F80582-0000-01E6-AACE-0002A5D5C51B")
+    private let toyModeCharacteristicUUID = CBUUID(string: "88F80583-0000-01E6-AACE-0002A5D5C51B")
     
     // Core Bluetooth objects.
     private var central: CBCentralManager!
@@ -24,6 +25,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     private var service: CBService?
     private var commandsCharacteristic: CBCharacteristic?
     private var statusCharacteristic: CBCharacteristic?
+    private var modeCharacteristic: CBCharacteristic?
     
     // Is the connectivity manager active?
     private var active = true
@@ -31,7 +33,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     // The identifier for the target toy.
     private var selectedPeripheralIdentifier: UUID?
     
-    // Use a private queue and a semaphore to coordinate start
+    // Use a private dispatch queue and a semaphore to coordinate start
     private let queue = DispatchQueue(label: "com.metafetish.raunch.connectivity")
     private var powerOnQueue: DispatchQueue? = DispatchQueue(label: "com.metafetish.raunch.connectivity")
     private var powerReady = DispatchSemaphore(value: 0)
@@ -77,8 +79,9 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
         
+        let data = command.asData()
+        peripheral.writeValue(data, for: commandsCharacteristic, type: .withoutResponse)
         os_log("Sending %@", log: bluetooth_log, type: .default, command.description)
-        peripheral.writeValue(command.asData(), for: commandsCharacteristic, type: .withResponse)
     }
 
     // MARK: CBCentralManagerDelegate
@@ -162,7 +165,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     self.service = service
                     
                     os_log("Discovering characteristics...", log: bluetooth_log, type: .default)
-                    peripheral.discoverCharacteristics([ toyCommandsCharacteristicUUID, toyStatusCharacteristicUUID ], for: service)
+                    peripheral.discoverCharacteristics([ toyCommandsCharacteristicUUID, toyStatusCharacteristicUUID, toyModeCharacteristicUUID ], for: service)
                 }
             }
         }
@@ -185,11 +188,18 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                         os_log("Discovered status characteristic", log: bluetooth_log, type: .default)
                         statusCharacteristic = characteristic
                     }
+                    else if characteristic.uuid == toyModeCharacteristicUUID {
+                        os_log("Discovered mode characteristic", log: bluetooth_log, type: .default)
+                        modeCharacteristic = characteristic
+                    }
                 }
                 
-                if let commandsCharacteristic = commandsCharacteristic {
-                    os_log("Sending initial 0x0...", log: bluetooth_log, type: .debug)
-                    self.peripheral?.writeValue(Data(bytes: [ 0x0 ]), for: commandsCharacteristic, type: .withResponse)
+                // TODO: Do that better
+                if let modeCharacteristic = modeCharacteristic {
+                    queue.asyncAfter(deadline: .now() + 2.0, execute: {
+                        os_log("Sending initial 0x0...", log: bluetooth_log, type: .debug)
+                        self.peripheral?.writeValue(Data(bytes: [ 0x0 ]), for: modeCharacteristic, type: .withResponse)
+                    })
                 }
             }
         }

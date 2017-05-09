@@ -9,5 +9,6 @@
 import os
 
 // tailor:off
-let bluetooth_log = OSLog(subsystem: "com.metafetish", category: "Bluetooth")
+let bluetooth_log = OSLog(subsystem: "com.metafetish.raunch", category: "Bluetooth")
+let player_log = OSLog(subsystem: "com.metafetish.raunch", category: "Player")
 // tailor:on
