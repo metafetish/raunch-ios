@@ -46,6 +46,7 @@ public class Player {
             self.thread = nil
         }
     }
+    
 }
 
 /// A player thread.
@@ -78,8 +79,6 @@ final class PlayerThread: Thread {
     
     /// The index for the track command to play next.
     var index: Int
-    
-    private var dates = [Date]()
     
     /// The time at which playback started.
     private var startedAt: UInt64 = 0
@@ -123,7 +122,7 @@ final class PlayerThread: Thread {
     /// Moves the thread to the real time scheduling class.
     private func moveToRealTimeSchedulingClass() {
         
-        let THREAD_TIME_CONSTRAINT_POLICY_COUNT = MemoryLayout<thread_time_constraint_policy>.size / MemoryLayout<integer_t>.size
+        let threadTimeConstraintPolicyCount = MemoryLayout<thread_time_constraint_policy>.size / MemoryLayout<integer_t>.size
         var policy = thread_time_constraint_policy(
             period: 0,
             computation: UInt32(5 * RaunchTime.clockToAbs),
@@ -132,8 +131,8 @@ final class PlayerThread: Thread {
         )
         
         _ = withUnsafeMutablePointer(to: &policy) {
-            $0.withMemoryRebound(to: integer_t.self, capacity: THREAD_TIME_CONSTRAINT_POLICY_COUNT) {
-                thread_policy_set(pthread_mach_thread_np(pthread_self()), thread_policy_flavor_t(THREAD_TIME_CONSTRAINT_POLICY), $0, mach_msg_type_number_t(THREAD_TIME_CONSTRAINT_POLICY_COUNT))
+            $0.withMemoryRebound(to: integer_t.self, capacity: threadTimeConstraintPolicyCount) {
+                thread_policy_set(pthread_mach_thread_np(pthread_self()), thread_policy_flavor_t(THREAD_TIME_CONSTRAINT_POLICY), $0, mach_msg_type_number_t(threadTimeConstraintPolicyCount))
             }
         }
     }
@@ -156,19 +155,23 @@ final class PlayerThread: Thread {
         
         return command
     }
+    
 }
 
+// Time utilities.
 fileprivate extension RaunchTime {
     
+    /// Constant to use to convert from and from Mach time to absolute time in milliseconds.
+    /// See https://developer.apple.com/library/content/qa/qa1398/_index.html
     static var clockToAbs: UInt64 {
         var info = mach_timebase_info(numer: 0, denom: 0)
         mach_timebase_info(&info)
         return UInt64(Double(info.denom) / Double(info.numer) * 1000000)
     }
     
+    /// Converts from absolute time in millisecond to Mach time.
     func toMachTime() -> UInt64 {
         return RaunchTime.clockToAbs * UInt64(self)
     }
     
 }
-
