@@ -47,6 +47,15 @@ public class RaunchPlayer {
         }
     }
     
+    /// Seek to time
+    public func seek(to time: RaunchTimeInterval) {
+        offset = RaunchTimeInterval.clockToAbs * UInt64(time)
+        if let thread = thread {
+            thread.cancel()
+            play()
+        }
+    }
+    
 }
 
 /// A player thread.
