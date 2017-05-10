@@ -9,10 +9,10 @@
 import Foundation
 
 /// A command to send to the toy.
-struct Command {
+struct RaunchCommand {
     
-    /// The time at which to fire the command, relative to the start of a track.
-    let time: RaunchTime
+    /// The time at which to fire the command, relative to the start of a track, in milliseconds.
+    let time: RaunchTimeInterval
     
     /// The desired position of the toy.
     let position: Int
@@ -26,7 +26,7 @@ struct Command {
     /// - Parameter speed: The speed at which the toy should move. Valid values are 20-99.
     /// - Throws: `RaunchError.invalidPositionValue` if the position value is invalid.
     ///           `RaunchError.invalidSpeedValue` if the speed value is invalid.
-    init(time: RaunchTime, position: Int, speed: Int) throws {
+    init(time: RaunchTimeInterval, position: Int, speed: Int) throws {
         guard position >= 0 && position <= 99 else {
             throw RaunchError.invalidPositionValue
         }
@@ -40,18 +40,27 @@ struct Command {
         self.speed = speed
     }
     
-    /// Returns the command as a two bytes packet.
-    func asData() -> Data {
-        return Data(bytes: [ UInt8(position), UInt8(speed) ])
+}
+
+// Display Raunch commands as strings.
+extension RaunchCommand: CustomStringConvertible {
+    
+    var description: String {
+        return "[position=\(position), speed=\(speed))"
     }
     
 }
 
-// Display commands as strings.
-extension Command: CustomStringConvertible {
+/// A Raunch content track.
+final class RaunchTrack {
     
-    var description: String {
-        return "[position=\(position), speed=\(speed))"
+    /// The track's commands.
+    var commands: [RaunchCommand]
+    
+    /// Creates a Raunch content track.
+    /// - Parameter commands: The track's timed commands.
+    init(commands: [RaunchCommand]) {
+        self.commands = commands
     }
     
 }

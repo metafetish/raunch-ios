@@ -9,4 +9,11 @@
 import Foundation
 
 /// Content time is measured in milliseconds.
-typealias RaunchTime = Int
+typealias RaunchTimeInterval = Int64
+
+extension RaunchTimeInterval {
+    
+    /// A really long time.
+    static var forever = Int64.max
+    
+}

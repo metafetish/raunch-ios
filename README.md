@@ -2,7 +2,7 @@
 
 [![Patreon donate button](https://img.shields.io/badge/patreon-donate-yellow.svg)](https://www.patreon.com/qdot)
 
-Raunch will be a library for controlling the Fleshlight Launch Sex Toy on iOS.
+Raunch is a library for controlling the Launch sex toy on iOS. The library allows developers to create applications that can control the speed and position of the device.
 
 ## Support The Project
 

@@ -10,22 +10,22 @@ import os
 import Foundation
 
 /// A content player.
-public class Player {
+public class RaunchPlayer {
     
     /// The Bluetooth connectivity manager to use to send commands.
     private let bluetooth: Bluetooth
     
     /// The track to play.
-    private let track: Track
+    private let track: RaunchTrack
     
     /// The player's thread, if playing
-    private var thread: PlayerThread?
+    private var thread: RaunchPlayerThread?
     
     /// The offset to use to start playback
     private var offset: UInt64
     
     /// Creates a player.
-    init(bluetooth: Bluetooth, track: Track) {
+    init(bluetooth: Bluetooth, track: RaunchTrack) {
         self.bluetooth = bluetooth
         self.track = track
         self.offset = 0
@@ -33,7 +33,7 @@ public class Player {
 
     /// Start playing.
     public func play() {
-        let thread = PlayerThread(bluetooth: bluetooth, track: track, offset: offset)
+        let thread = RaunchPlayerThread(bluetooth: bluetooth, track: track, offset: offset)
         thread.start()
         self.thread = thread
     }
@@ -50,19 +50,19 @@ public class Player {
 }
 
 /// A player thread.
-final class PlayerThread: Thread {
+final class RaunchPlayerThread: Thread {
     
     /// The Bluetooth connectivity manager to use to send commands.
     private let bluetooth: Bluetooth
     
     /// The track to play.
-    let track: Track
+    let track: RaunchTrack
     
     /// The track offset at which playback started.
     private var offset: UInt64
     
     /// Create a new player thread.
-    init(bluetooth: Bluetooth, track: Track, offset: UInt64) {
+    init(bluetooth: Bluetooth, track: RaunchTrack, offset: UInt64) {
         self.bluetooth = bluetooth
         self.track = track
         self.offset = offset
@@ -125,8 +125,8 @@ final class PlayerThread: Thread {
         let threadTimeConstraintPolicyCount = MemoryLayout<thread_time_constraint_policy>.size / MemoryLayout<integer_t>.size
         var policy = thread_time_constraint_policy(
             period: 0,
-            computation: UInt32(5 * RaunchTime.clockToAbs),
-            constraint: UInt32(10 * RaunchTime.clockToAbs),
+            computation: UInt32(5 * RaunchTimeInterval.clockToAbs),
+            constraint: UInt32(10 * RaunchTimeInterval.clockToAbs),
             preemptible: 0
         )
         
@@ -138,8 +138,8 @@ final class PlayerThread: Thread {
     }
     
     /// Returns the first command that is in the future or nil.
-    private func nextCommand() -> Command? {
-        var command: Command? = nil
+    private func nextCommand() -> RaunchCommand? {
+        var command: RaunchCommand? = nil
         
         while index < track.commands.count {
             let cmd = track.commands[index]
@@ -159,7 +159,7 @@ final class PlayerThread: Thread {
 }
 
 // Time utilities.
-fileprivate extension RaunchTime {
+fileprivate extension RaunchTimeInterval {
     
     /// Constant to use to convert from and from Mach time to absolute time in milliseconds.
     /// See https://developer.apple.com/library/content/qa/qa1398/_index.html
@@ -171,7 +171,7 @@ fileprivate extension RaunchTime {
     
     /// Converts from absolute time in millisecond to Mach time.
     func toMachTime() -> UInt64 {
-        return RaunchTime.clockToAbs * UInt64(self)
+        return RaunchTimeInterval.clockToAbs * UInt64(self)
     }
     
 }

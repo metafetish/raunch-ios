@@ -72,7 +72,7 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
    
     
     /// Sends a command to the toy.
-    func send(_ command: Command) {
+    func send(_ command: RaunchCommand) {
         guard let peripheral = peripheral,
             let commandsCharacteristic = commandsCharacteristic else {
             os_log("Not ready to send a command", log: bluetooth_log, type: .default)
@@ -203,6 +203,16 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 }
             }
         }
+    }
+    
+}
+
+// Raunch commands as data.
+extension RaunchCommand {
+    
+    /// Returns the command as a two bytes packet.
+    func asData() -> Data {
+        return Data(bytes: [ UInt8(position), UInt8(speed) ])
     }
     
 }

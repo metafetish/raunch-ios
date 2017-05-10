@@ -12,7 +12,7 @@
 		9C2F43DD1EB2DABB00086968 /* RaunchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9C2F43D51EB2DABB00086968 /* RaunchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9C2F43EA1EB2DB0600086968 /* RaunchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C2F43D51EB2DABB00086968 /* RaunchKit.framework */; };
 		9C2F43F61EB2DB4800086968 /* Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F43F01EB2DB4800086968 /* Bluetooth.swift */; };
-		9C2F43F71EB2DB4800086968 /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F43F11EB2DB4800086968 /* Commands.swift */; };
+		9C2F43F71EB2DB4800086968 /* RaunchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F43F11EB2DB4800086968 /* RaunchProtocol.swift */; };
 		9C2F43F81EB2DB4800086968 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F43F21EB2DB4800086968 /* Errors.swift */; };
 		9C2F43F91EB2DB4800086968 /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F43F31EB2DB4800086968 /* Logs.swift */; };
 		9C2F43FA1EB2DB4800086968 /* Raunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F43F41EB2DB4800086968 /* Raunch.swift */; };
@@ -22,7 +22,8 @@
 		9C6B19AC1EB166C100E21640 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C6B19AA1EB166C100E21640 /* Main.storyboard */; };
 		9C6B19AE1EB166C100E21640 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6B19AD1EB166C100E21640 /* Assets.xcassets */; };
 		9C6B19B11EB166C100E21640 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C6B19AF1EB166C100E21640 /* LaunchScreen.storyboard */; };
-		9C984F291EBA96C600A5077A /* Tracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C984F281EBA96C600A5077A /* Tracks.swift */; };
+		9C8DF07D1EC27E56002E13C9 /* MiiyooProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8DF07C1EC27E56002E13C9 /* MiiyooProtocol.swift */; };
+		9C8DF07F1EC2862A002E13C9 /* ProtocolTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8DF07E1EC2862A002E13C9 /* ProtocolTranslation.swift */; };
 		9C984F2D1EBA98EB00A5077A /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C984F2C1EBA98EB00A5077A /* Time.swift */; };
 		9C9B26001EB61A5100BAB281 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B25FF1EB61A5100BAB281 /* Player.swift */; };
 /* End PBXBuildFile section */
@@ -65,7 +66,7 @@
 		9C2F43E51EB2DB0600086968 /* RaunchKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RaunchKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C2F43E91EB2DB0600086968 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C2F43F01EB2DB4800086968 /* Bluetooth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bluetooth.swift; sourceTree = "<group>"; };
-		9C2F43F11EB2DB4800086968 /* Commands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
+		9C2F43F11EB2DB4800086968 /* RaunchProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaunchProtocol.swift; sourceTree = "<group>"; };
 		9C2F43F21EB2DB4800086968 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		9C2F43F31EB2DB4800086968 /* Logs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
 		9C2F43F41EB2DB4800086968 /* Raunch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Raunch.swift; sourceTree = "<group>"; };
@@ -77,7 +78,8 @@
 		9C6B19AD1EB166C100E21640 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C6B19B01EB166C100E21640 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C6B19B21EB166C100E21640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9C984F281EBA96C600A5077A /* Tracks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tracks.swift; sourceTree = "<group>"; };
+		9C8DF07C1EC27E56002E13C9 /* MiiyooProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiiyooProtocol.swift; sourceTree = "<group>"; };
+		9C8DF07E1EC2862A002E13C9 /* ProtocolTranslation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolTranslation.swift; sourceTree = "<group>"; };
 		9C984F2C1EBA98EB00A5077A /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		9C9B25FF1EB61A5100BAB281 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		9CAFA3E01EB0D5FF00B63BE7 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -114,9 +116,10 @@
 			isa = PBXGroup;
 			children = (
 				9C2F43F41EB2DB4800086968 /* Raunch.swift */,
+				9C2F43F11EB2DB4800086968 /* RaunchProtocol.swift */,
+				9C8DF07C1EC27E56002E13C9 /* MiiyooProtocol.swift */,
+				9C8DF07E1EC2862A002E13C9 /* ProtocolTranslation.swift */,
 				9C2F43F01EB2DB4800086968 /* Bluetooth.swift */,
-				9C2F43F11EB2DB4800086968 /* Commands.swift */,
-				9C984F281EBA96C600A5077A /* Tracks.swift */,
 				9C9B25FF1EB61A5100BAB281 /* Player.swift */,
 				9C2F43F21EB2DB4800086968 /* Errors.swift */,
 				9C2F43F31EB2DB4800086968 /* Logs.swift */,
@@ -353,11 +356,12 @@
 				9C2F43FA1EB2DB4800086968 /* Raunch.swift in Sources */,
 				9C2F43F61EB2DB4800086968 /* Bluetooth.swift in Sources */,
 				9C2F43F81EB2DB4800086968 /* Errors.swift in Sources */,
-				9C984F291EBA96C600A5077A /* Tracks.swift in Sources */,
 				9C2F43F91EB2DB4800086968 /* Logs.swift in Sources */,
+				9C8DF07D1EC27E56002E13C9 /* MiiyooProtocol.swift in Sources */,
+				9C8DF07F1EC2862A002E13C9 /* ProtocolTranslation.swift in Sources */,
 				9C9B26001EB61A5100BAB281 /* Player.swift in Sources */,
 				9C984F2D1EBA98EB00A5077A /* Time.swift in Sources */,
-				9C2F43F71EB2DB4800086968 /* Commands.swift in Sources */,
+				9C2F43F71EB2DB4800086968 /* RaunchProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
