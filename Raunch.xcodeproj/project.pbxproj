@@ -40,8 +40,8 @@
 		9C2F43F31EB2DB4800086968 /* Logs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
 		9C2F43F41EB2DB4800086968 /* Raunch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Raunch.swift; sourceTree = "<group>"; };
 		9C2F43FD1EB2DBAD00086968 /* CommandsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandsTests.swift; sourceTree = "<group>"; };
-		9C332AA11EC3D59D00256BF5 /* RaunchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = RaunchKit.framework; path = "/Users/blackboxed/Code/raunch-ios/build/Debug-iphoneos/RaunchKit.framework"; sourceTree = "<absolute>"; };
-		9C332AA21EC3D59D00256BF5 /* RaunchKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = RaunchKitTests.xctest; path = "/Users/blackboxed/Code/raunch-ios/build/Debug-iphoneos/RaunchKitTests.xctest"; sourceTree = "<absolute>"; };
+		9C3B88E21EC3D7CF008320ED /* RaunchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RaunchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C3B88E31EC3D7CF008320ED /* RaunchKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RaunchKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C8DF07C1EC27E56002E13C9 /* MiiyooProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiiyooProtocol.swift; sourceTree = "<group>"; };
 		9C8DF07E1EC2862A002E13C9 /* ProtocolTranslation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolTranslation.swift; sourceTree = "<group>"; };
 		9C984F2C1EBA98EB00A5077A /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
@@ -110,21 +110,31 @@
 			name = "Supporting files";
 			sourceTree = "<group>";
 		};
-		9CAFA3CA1EB0D5C500B63BE7 = {
-			isa = PBXGroup;
-			children = (
-				9C2F43D61EB2DABB00086968 /* RaunchKit */,
-				9C2F43E61EB2DB0600086968 /* RaunchKitTests */,
-				9CAFA3DF1EB0D5FF00B63BE7 /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		9CAFA3DF1EB0D5FF00B63BE7 /* Frameworks */ = {
+		9C3B88E41EC3D7ED008320ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				9CAFA3E01EB0D5FF00B63BE7 /* CoreBluetooth.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9CAFA3CA1EB0D5C500B63BE7 = {
+			isa = PBXGroup;
+			children = (
+				9C2F43D61EB2DABB00086968 /* RaunchKit */,
+				9C2F43E61EB2DB0600086968 /* RaunchKitTests */,
+				9C3B88E41EC3D7ED008320ED /* Frameworks */,
+				9CAFA3DF1EB0D5FF00B63BE7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9CAFA3DF1EB0D5FF00B63BE7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9C3B88E21EC3D7CF008320ED /* RaunchKit.framework */,
+				9C3B88E31EC3D7CF008320ED /* RaunchKitTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,7 +166,7 @@
 			);
 			name = RaunchKit;
 			productName = RaunchKit;
-			productReference = 9C332AA11EC3D59D00256BF5 /* RaunchKit.framework */;
+			productReference = 9C3B88E21EC3D7CF008320ED /* RaunchKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		9C2F43E41EB2DB0600086968 /* RaunchKitTests */ = {
@@ -174,7 +184,7 @@
 			);
 			name = RaunchKitTests;
 			productName = RaunchKitTests;
-			productReference = 9C332AA21EC3D59D00256BF5 /* RaunchKitTests.xctest */;
+			productReference = 9C3B88E31EC3D7CF008320ED /* RaunchKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
