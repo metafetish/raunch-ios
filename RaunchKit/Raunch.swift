@@ -29,4 +29,11 @@ public class Raunch {
         bluetooth.send(command)
     }
     
+    /// Returns a content player for a content track.
+    /// - Parameter track: The content track.
+    /// - Returns: A content player.
+    public static func player(for track: RaunchTrack) -> RaunchPlayer {
+        return RaunchPlayer(bluetooth: bluetooth, track: track)
+    }
+    
 }

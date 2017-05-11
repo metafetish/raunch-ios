@@ -9,39 +9,39 @@
 import Foundation
 
 /// A Miiyoo event.
-struct MiiyooEvent {
+public struct MiiyooEvent {
     
     /// The time at which to fire the event, relative to the start of a track, in milliseconds.
-    let time: RaunchTimeInterval
+    public let time: RaunchTimeInterval
     
     /// The position/intensity of the event.
-    let value: UInt8
+    public let value: UInt8
 }
 
 // Display Miiyoo events as strings.
 extension MiiyooEvent: CustomStringConvertible {
     
-    var description: String {
+    public var description: String {
         return "[time=\(time), value=\(value))"
     }
     
 }
 
 // A Miiyoo content track.
-final class MiiyooTrack {
+public final class MiiyooTrack {
     
     /// The track's events.
-    let events: [MiiyooEvent]
+    public let events: [MiiyooEvent]
     
     /// Creates a Miiyoo content track.
     /// - Parameter events: The track's events.
-    init(events: [MiiyooEvent]) {
+    public init(events: [MiiyooEvent]) {
         self.events = events
     }
     
     /// Creates a Miiyoo content track from data.
     /// - Parameter string: The track's event as string.
-    convenience init(string: String) {
+    public convenience init(string: String) {
         
         // TODO: Do this better
         

@@ -83,6 +83,7 @@ final class RaunchPlayerThread: Thread {
             if command.time.toMachTime() > self.offset {
                 break
             }
+            index = index + 1
         }
     }
     

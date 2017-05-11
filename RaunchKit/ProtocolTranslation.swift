@@ -166,7 +166,7 @@ extension RaunchTrack {
     
     /// Creates a Raunch content track from a Miiyoo content track.
     /// Parameter track: A Miiyoo content track.
-    convenience init(miiyooTrack: MiiyooTrack) {
+    public convenience init(miiyooTrack: MiiyooTrack) {
         
         /// Use a MiiyooToRaunchTranslator to do the dirty work
         var commands = [RaunchCommand]()
