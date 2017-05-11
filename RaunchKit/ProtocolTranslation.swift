@@ -98,6 +98,9 @@ final class MiiyooToRaunchTranslator {
                     return nil
                 }
             }
+            else {
+                return nil
+            }
         }
         else {
             // Reset rate-limited speed
@@ -113,8 +116,6 @@ final class MiiyooToRaunchTranslator {
                 return nil
             }
         }
-        
-        return nil
     }
     
     /// Chooses a new speed based on the interval between events and the previous speed.
