@@ -8,12 +8,52 @@
 
 import Foundation
 
-/// Content time is measured in milliseconds.
-public typealias RaunchTimeInterval = Int64
-
-public extension RaunchTimeInterval {
+/// Content time.
+public struct RaunchTimeInterval {
+    
+    /// The interval measured in milliseconds.
+    internal var milliseconds: Int64
+    
+    /// Creates a content time value.
+    /// Parameter milliseconds: The value in milliseconds
+    public init(milliseconds: Int64) {
+        self.milliseconds = milliseconds
+    }
     
     /// A really long time.
-    static var forever = Int64.max
+    public static var forever = RaunchTimeInterval(milliseconds: Int64.max)
     
 }
+
+// Display Raunch commands as strings.
+extension RaunchTimeInterval: CustomStringConvertible {
+    
+    public var description: String {
+        let valueInSeconds = Double(milliseconds) / 1000.0
+        return String(format:"%.2f", valueInSeconds)
+    }
+    
+}
+
+// MARK: Operators
+
+
+internal func +(left: RaunchTimeInterval, right: RaunchTimeInterval) -> RaunchTimeInterval {
+    return RaunchTimeInterval(milliseconds: left.milliseconds + right.milliseconds)
+}
+
+internal func -(left: RaunchTimeInterval, right: RaunchTimeInterval) -> RaunchTimeInterval {
+    return RaunchTimeInterval(milliseconds: left.milliseconds - right.milliseconds)
+}
+
+internal func <=(left: RaunchTimeInterval, right: RaunchTimeInterval) -> Bool {
+    return left.milliseconds <= right.milliseconds
+}
+
+internal func <(left: RaunchTimeInterval, right: RaunchTimeInterval) -> Bool {
+    return left.milliseconds < right.milliseconds
+}
+
+
+
+

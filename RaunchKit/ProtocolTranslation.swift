@@ -49,7 +49,7 @@ final class MiiyooToRaunchTranslator {
     var direction = Direction.down
     
     /// The minimum amount of time between events in milliseconds.
-    static let rateLimit: RaunchTimeInterval = 150
+    static let rateLimit = RaunchTimeInterval(milliseconds: 150)
     
     /// Processes a Miiyoo event.
     /// - Parameter event: A Miiyoo event.
@@ -84,7 +84,7 @@ final class MiiyooToRaunchTranslator {
             }
             
             // Only trigger if the last executed command is longer ago than the current event.
-            let previousCommandTime = previousCommand?.time ?? 0
+            let previousCommandTime = previousCommand?.time ?? RaunchTimeInterval(milliseconds: 0)
             if previousCommandTime < event.time {
                 
                 // New command in the future
@@ -124,16 +124,16 @@ final class MiiyooToRaunchTranslator {
         var speed = 0
         
         // Move with "default" speed of 50% when it has been 2000 ms or more since last event.
-        if interval >= 2000 {
+        if interval.milliseconds >= 2000 {
             speed = 50
         }
         // Move at the "slowest" speed of 20% when it has been 1000 ms or more since last event.
-        else if interval >= 1000 {
+        else if interval.milliseconds >= 1000 {
             speed = 20
         }
         else {
             // Raw speed value between events is 100 - (hundredth sec + 10%)
-            var rawSpeed = 100 - Int((Double(interval) / 10.0) * 1.1)
+            var rawSpeed = 100 - Int((Double(interval.milliseconds) / 10.0) * 1.1)
             if rawSpeed < 0 {
                 rawSpeed = 0
             }

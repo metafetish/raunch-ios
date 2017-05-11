@@ -46,7 +46,7 @@ public struct RaunchCommand {
 extension RaunchCommand: CustomStringConvertible {
     
     public var description: String {
-        return "[position=\(position), speed=\(speed))"
+        return "[time=\(time.description), position=\(position), speed=\(speed))"
     }
     
 }

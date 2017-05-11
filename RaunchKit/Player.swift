@@ -22,13 +22,13 @@ public class RaunchPlayer {
     private var thread: RaunchPlayerThread?
     
     /// The offset to use to start playback
-    private var offset: UInt64
+    private var offset: RaunchTimeInterval
     
     /// Creates a player.
     init(bluetooth: Bluetooth, track: RaunchTrack) {
         self.bluetooth = bluetooth
         self.track = track
-        self.offset = 0
+        self.offset = RaunchTimeInterval(milliseconds: 0)
     }
 
     /// Start playing.
@@ -36,6 +36,7 @@ public class RaunchPlayer {
         let thread = RaunchPlayerThread(bluetooth: bluetooth, track: track, offset: offset)
         thread.start()
         self.thread = thread
+        os_log("Playing from %@", log: player_log, type: .default, offset.description)
     }
     
     /// Pause playing
@@ -49,7 +50,7 @@ public class RaunchPlayer {
     
     /// Seek to time
     public func seek(to time: RaunchTimeInterval) {
-        offset = RaunchTimeInterval.clockToAbs * UInt64(time)
+        offset = time
         if let thread = thread {
             thread.cancel()
             play()
@@ -71,10 +72,10 @@ final class RaunchPlayerThread: Thread {
     private var offset: UInt64
     
     /// Create a new player thread.
-    init(bluetooth: Bluetooth, track: RaunchTrack, offset: UInt64) {
+    init(bluetooth: Bluetooth, track: RaunchTrack, offset: RaunchTimeInterval) {
         self.bluetooth = bluetooth
         self.track = track
-        self.offset = offset
+        self.offset = UInt64(RaunchTimeInterval.clockToAbs * offset.milliseconds)
         
         // Index is next playable command
         index = 0
@@ -94,8 +95,9 @@ final class RaunchPlayerThread: Thread {
     private var startedAt: UInt64 = 0
     
     /// The track time elasped since the thread started
-    var elapsed: UInt64 {
-        return mach_absolute_time() - startedAt + offset
+    var elapsed: RaunchTimeInterval {
+        let elapsedInMachTime = mach_absolute_time() - startedAt + offset
+        return RaunchTimeInterval(milliseconds: Int64(elapsedInMachTime) / RaunchTimeInterval.clockToAbs)
     }
     
     // The thread processing loop.
@@ -153,7 +155,8 @@ final class RaunchPlayerThread: Thread {
         
         while index < track.commands.count {
             let cmd = track.commands[index]
-            if cmd.time.toMachTime() > elapsed {
+            let elapsedInMachTime = mach_absolute_time() - startedAt + offset
+            if cmd.time.toMachTime() > elapsedInMachTime {
                 command = cmd
                 index = index + 1
                 break
@@ -173,15 +176,15 @@ fileprivate extension RaunchTimeInterval {
     
     /// Constant to use to convert from and from Mach time to absolute time in milliseconds.
     /// See https://developer.apple.com/library/content/qa/qa1398/_index.html
-    static var clockToAbs: UInt64 {
+    static var clockToAbs: Int64 {
         var info = mach_timebase_info(numer: 0, denom: 0)
         mach_timebase_info(&info)
-        return UInt64(Double(info.denom) / Double(info.numer) * 1000000)
+        return Int64(Double(info.denom) / Double(info.numer) * 1000000)
     }
     
     /// Converts from absolute time in millisecond to Mach time.
     func toMachTime() -> UInt64 {
-        return RaunchTimeInterval.clockToAbs * UInt64(self)
+        return UInt64(RaunchTimeInterval.clockToAbs * self.milliseconds)
     }
     
 }

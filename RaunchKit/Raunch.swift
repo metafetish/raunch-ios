@@ -25,7 +25,7 @@ public class Raunch {
     /// - Throws: `RaunchError.invalidPositionValue` if the position value is invalid.
     ///           `RaunchError.invalidSpeedValue` if the speed value is invalid.
     public static func position(_ position: Int, speed: Int) throws {
-        let command = try RaunchCommand(time: 0, position: position, speed: speed) // Time does not matter as we'll send it immediately.
+        let command = try RaunchCommand(time: RaunchTimeInterval(milliseconds: 0), position: position, speed: speed) // Time does not matter as we'll send it immediately.
         bluetooth.send(command)
     }
     

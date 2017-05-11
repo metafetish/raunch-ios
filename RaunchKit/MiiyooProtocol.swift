@@ -22,7 +22,7 @@ public struct MiiyooEvent {
 extension MiiyooEvent: CustomStringConvertible {
     
     public var description: String {
-        return "[time=\(time), value=\(value))"
+        return "[time=\(time.description), value=\(value))"
     }
     
 }
@@ -47,7 +47,7 @@ public final class MiiyooTrack {
         
         let events = string.components(separatedBy: ",").map { (string) -> MiiyooEvent in
             let array = string.components(separatedBy: ":")
-            let time = RaunchTimeInterval(Double(array[0])! * 1000.0)
+            let time = RaunchTimeInterval(milliseconds: Int64(Double(array[0])! * 1000.0))
             let value = UInt8(array[1])!
             return MiiyooEvent(time: time, value: value)
         }

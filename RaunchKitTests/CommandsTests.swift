@@ -11,8 +11,10 @@ import XCTest
 
 class CommandsTests: XCTestCase {
     
+    let zero = RaunchTimeInterval(milliseconds: 0)
+    
     func testCommandDataIsValid() throws {
-        let command = try RaunchCommand(time: 0, position: 92, speed: 42)
+        let command = try RaunchCommand(time: zero, position: 92, speed: 42)
         let data = command.asData()
         XCTAssertEqual(data.count, 2)
         data.withUnsafeBytes { (bytes: UnsafePointer<UInt8>) -> () in
@@ -22,38 +24,38 @@ class CommandsTests: XCTestCase {
     }
     
     func testCommandThrowsOnInvalidPosition() throws {
-        XCTAssertThrowsError(try RaunchCommand(time: 0, position: -256, speed: 42), "should throw an error") { (error) in
+        XCTAssertThrowsError(try RaunchCommand(time: zero, position: -256, speed: 42), "should throw an error") { (error) in
             XCTAssert(error is RaunchError)
             XCTAssertEqual(error as? RaunchError, RaunchError.invalidPositionValue)
         }
-        XCTAssertThrowsError(try RaunchCommand(time: 0, position: -1, speed: 42), "should throw an error") { (error) in
+        XCTAssertThrowsError(try RaunchCommand(time: zero, position: -1, speed: 42), "should throw an error") { (error) in
             XCTAssert(error is RaunchError)
             XCTAssertEqual(error as? RaunchError, RaunchError.invalidPositionValue)
         }
-        XCTAssertThrowsError(try RaunchCommand(time: 0, position: 100, speed: 42), "should throw an error") { (error) in
+        XCTAssertThrowsError(try RaunchCommand(time: zero, position: 100, speed: 42), "should throw an error") { (error) in
             XCTAssert(error is RaunchError)
             XCTAssertEqual(error as? RaunchError, RaunchError.invalidPositionValue)
         }
-        XCTAssertThrowsError(try RaunchCommand(time: 0, position: 2000, speed: 42), "should throw an error") { (error) in
+        XCTAssertThrowsError(try RaunchCommand(time: zero, position: 2000, speed: 42), "should throw an error") { (error) in
             XCTAssert(error is RaunchError)
             XCTAssertEqual(error as? RaunchError, RaunchError.invalidPositionValue)
         }
     }
     
     func testCommandThrowsOnInvalidSpeed() throws {
-        XCTAssertThrowsError(try RaunchCommand(time: 0, position: 92, speed: -25), "should throw an error") { (error) in
+        XCTAssertThrowsError(try RaunchCommand(time: zero, position: 92, speed: -25), "should throw an error") { (error) in
             XCTAssert(error is RaunchError)
             XCTAssertEqual(error as? RaunchError, RaunchError.invalidSpeedValue)
         }
-        XCTAssertThrowsError(try RaunchCommand(time: 0, position: 92, speed: 19), "should throw an error") { (error) in
+        XCTAssertThrowsError(try RaunchCommand(time: zero, position: 92, speed: 19), "should throw an error") { (error) in
             XCTAssert(error is RaunchError)
             XCTAssertEqual(error as? RaunchError, RaunchError.invalidSpeedValue)
         }
-        XCTAssertThrowsError(try RaunchCommand(time: 0, position: 92, speed: 100), "should throw an error") { (error) in
+        XCTAssertThrowsError(try RaunchCommand(time: zero, position: 92, speed: 100), "should throw an error") { (error) in
             XCTAssert(error is RaunchError)
             XCTAssertEqual(error as? RaunchError, RaunchError.invalidSpeedValue)
         }
-        XCTAssertThrowsError(try RaunchCommand(time: 0, position: 92, speed: 1024), "should throw an error") { (error) in
+        XCTAssertThrowsError(try RaunchCommand(time: zero, position: 92, speed: 1024), "should throw an error") { (error) in
             XCTAssert(error is RaunchError)
             XCTAssertEqual(error as? RaunchError, RaunchError.invalidSpeedValue)
         }
