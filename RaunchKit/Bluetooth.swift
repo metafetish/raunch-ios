@@ -11,7 +11,7 @@ import Foundation
 import CoreBluetooth
 
 /// A Bluetooth connectivity manager.
-class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+final class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     // UUIDs.
     private let toyServiceUUID = CBUUID(string: "88F80580-0000-01E6-AACE-0002A5D5C51B")
@@ -82,6 +82,19 @@ class Bluetooth: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         let data = command.asData()
         peripheral.writeValue(data, for: commandsCharacteristic, type: .withoutResponse)
         os_log("Sending %@", log: bluetooth_log, type: .default, command.description)
+    }
+    
+    /// Sends an event command to the toy.
+    func send(_ event: RaunchEvent) {
+        guard let peripheral = peripheral,
+            let commandsCharacteristic = commandsCharacteristic else {
+                os_log("Not ready to send a command", log: bluetooth_log, type: .default)
+                return
+        }
+        
+        let data = event.command.asData()
+        peripheral.writeValue(data, for: commandsCharacteristic, type: .withoutResponse)
+        os_log("Sending %@", log: bluetooth_log, type: .default, event.description)
     }
 
     // MARK: CBCentralManagerDelegate

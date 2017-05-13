@@ -34,10 +34,10 @@ final class MiiyooToRaunchTranslator {
     }
     
     /// The Miiyoo event that was last processed.
-    var previousEvent: MiiyooEvent?
+    var previousMiiyooEvent: MiiyooEvent?
     
-    /// The previous command that was sent.
-    var previousCommand: RaunchCommand?
+    /// The previous Raunch event that was sent.
+    var previousRaunchEvent: RaunchEvent?
     
     /// The current speed.
     var speed = 0
@@ -53,46 +53,46 @@ final class MiiyooToRaunchTranslator {
     
     /// Processes a Miiyoo event.
     /// - Parameter event: A Miiyoo event.
-    /// - Returns: A Raunch command or nil.
-    func process(event: MiiyooEvent) -> RaunchCommand? {
+    /// - Returns: A Raunch event or nil.
+    func process(event: MiiyooEvent) -> RaunchEvent? {
         
         // Don't move if value did not change
-        if event.value == previousEvent?.value {
+        if event.value == previousMiiyooEvent?.value {
             return nil
         }
         
         // Choose new speed
-        if let previousEvent = previousEvent {
-            speed = chooseSpeed(interval: event.time - previousEvent.time, previousSpeed: speed)
+        if let previousMiiyooEvent = previousMiiyooEvent {
+            speed = chooseSpeed(interval: event.time - previousMiiyooEvent.time, previousSpeed: speed)
         }
         else {
             speed = chooseSpeed(interval: RaunchTimeInterval.forever, previousSpeed: 0)
         }
-        previousEvent = event
+        previousMiiyooEvent = event
         
-        // How long has it been since we fired a command?
-        var intervalSinceLastCommand = RaunchTimeInterval.forever
-        if let previousCommand = previousCommand {
-            intervalSinceLastCommand = event.time - previousCommand.time
+        // How long has it been since we fired an event?
+        var intervalSinceLastEvent = RaunchTimeInterval.forever
+        if let previousRaunchEvent = previousRaunchEvent {
+            intervalSinceLastEvent = event.time - previousRaunchEvent.time
         }
         
         // If the event came in earlier than allowed
-        if intervalSinceLastCommand <= MiiyooToRaunchTranslator.rateLimit {
+        if intervalSinceLastEvent <= MiiyooToRaunchTranslator.rateLimit {
             if rateLimitedSpeed == 0 {
                 // Set the speed that will be used while limiter is active
                 rateLimitedSpeed = speed
             }
             
-            // Only trigger if the last executed command is longer ago than the current event.
-            let previousCommandTime = previousCommand?.time ?? RaunchTimeInterval(milliseconds: 0)
-            if previousCommandTime < event.time {
+            // Only trigger if the last executed Rauch event is longer ago than the current Miiyoo event.
+            let previousRaunchEventTime = previousRaunchEvent?.time ?? RaunchTimeInterval(milliseconds: 0)
+            if previousRaunchEventTime < event.time {
                 
-                // New command in the future
-                let futureTime = previousCommandTime + MiiyooToRaunchTranslator.rateLimit
+                // New event in the future
+                let futureTime = previousRaunchEventTime + MiiyooToRaunchTranslator.rateLimit
                 direction = direction.toggle()
-                if let command = try? RaunchCommand(time: futureTime, position: direction.rawValue, speed: rateLimitedSpeed) {
-                    previousCommand = command
-                    return command
+                if let raunchEvent = try? RaunchEvent(time: futureTime, position: direction.rawValue, speed: rateLimitedSpeed) {
+                    previousRaunchEvent = raunchEvent
+                    return raunchEvent
                 }
                 else {
                     return nil
@@ -106,11 +106,11 @@ final class MiiyooToRaunchTranslator {
             // Reset rate-limited speed
             rateLimitedSpeed = 0
             
-            // New command
+            // New event
             direction = direction.toggle()
-            if let command = try? RaunchCommand(time: event.time, position: direction.rawValue, speed: speed) {
-                previousCommand = command
-                return command
+            if let raunchEvent = try? RaunchEvent(time: event.time, position: direction.rawValue, speed: speed) {
+                previousRaunchEvent = raunchEvent
+                return raunchEvent
             }
             else {
                 return nil
@@ -170,15 +170,15 @@ extension RaunchTrack {
     public convenience init(miiyooTrack: MiiyooTrack) {
         
         /// Use a MiiyooToRaunchTranslator to do the dirty work
-        var commands = [RaunchCommand]()
+        var events = [RaunchEvent]()
         let translator = MiiyooToRaunchTranslator()
         miiyooTrack.events.forEach { (event) in
-            if let command = translator.process(event: event) {
-                commands.append(command)
+            if let raunchEvent = translator.process(event: event) {
+                events.append(raunchEvent)
             }
         }
         
-        self.init(commands: commands)
+        self.init(events: events)
     }
     
 }

@@ -18,6 +18,8 @@
 		9C8DF07F1EC2862A002E13C9 /* ProtocolTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8DF07E1EC2862A002E13C9 /* ProtocolTranslation.swift */; };
 		9C984F2D1EBA98EB00A5077A /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C984F2C1EBA98EB00A5077A /* Time.swift */; };
 		9C9B26001EB61A5100BAB281 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B25FF1EB61A5100BAB281 /* Player.swift */; };
+		9CB4028C1EC6954F000D195E /* Threads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB4028B1EC6954F000D195E /* Threads.swift */; };
+		9CB4028E1EC695B4000D195E /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB4028D1EC695B4000D195E /* Generator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		9C984F2C1EBA98EB00A5077A /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		9C9B25FF1EB61A5100BAB281 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		9CAFA3E01EB0D5FF00B63BE7 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		9CB4028B1EC6954F000D195E /* Threads.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Threads.swift; sourceTree = "<group>"; };
+		9CB4028D1EC695B4000D195E /* Generator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,9 +80,11 @@
 				9C8DF07E1EC2862A002E13C9 /* ProtocolTranslation.swift */,
 				9C2F43F01EB2DB4800086968 /* Bluetooth.swift */,
 				9C9B25FF1EB61A5100BAB281 /* Player.swift */,
+				9CB4028D1EC695B4000D195E /* Generator.swift */,
 				9C2F43F21EB2DB4800086968 /* Errors.swift */,
 				9C2F43F31EB2DB4800086968 /* Logs.swift */,
 				9C984F2C1EBA98EB00A5077A /* Time.swift */,
+				9CB4028B1EC6954F000D195E /* Threads.swift */,
 				9C2F43FC1EB2DB5200086968 /* Supporting files */,
 			);
 			path = RaunchKit;
@@ -255,7 +261,9 @@
 				9C2F43F91EB2DB4800086968 /* Logs.swift in Sources */,
 				9C8DF07D1EC27E56002E13C9 /* MiiyooProtocol.swift in Sources */,
 				9C8DF07F1EC2862A002E13C9 /* ProtocolTranslation.swift in Sources */,
+				9CB4028E1EC695B4000D195E /* Generator.swift in Sources */,
 				9C9B26001EB61A5100BAB281 /* Player.swift in Sources */,
+				9CB4028C1EC6954F000D195E /* Threads.swift in Sources */,
 				9C984F2D1EBA98EB00A5077A /* Time.swift in Sources */,
 				9C2F43F71EB2DB4800086968 /* RaunchProtocol.swift in Sources */,
 			);

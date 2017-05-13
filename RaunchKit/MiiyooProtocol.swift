@@ -44,7 +44,6 @@ public final class MiiyooTrack {
     public convenience init(string: String) {
         
         // TODO: Do this better
-        
         let events = string.components(separatedBy: ",").map { (string) -> MiiyooEvent in
             let array = string.components(separatedBy: ":")
             let time = RaunchTimeInterval(milliseconds: Int64(Double(array[0])! * 1000.0))

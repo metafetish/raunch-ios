@@ -10,7 +10,7 @@ import os
 import Foundation
 
 /// A content player.
-public class RaunchPlayer {
+public final class RaunchPlayer {
     
     /// The Bluetooth connectivity manager to use to send commands.
     private let bluetooth: Bluetooth
@@ -79,8 +79,8 @@ final class RaunchPlayerThread: Thread {
         
         // Index is next playable command
         index = 0
-        while index < track.commands.count {
-            let command = track.commands[index]
+        while index < track.events.count {
+            let command = track.events[index]
             if command.time.toMachTime() > self.offset {
                 break
             }
@@ -113,12 +113,12 @@ final class RaunchPlayerThread: Thread {
         while !isCancelled {
             
             // Get the next command or return if we are done
-            guard let command = nextCommand() else {
+            guard let event = nextEvent() else {
                 return
             }
             
             // Wait until the command is ready to fire.
-            let deadline = startedAt + command.time.toMachTime() - offset
+            let deadline = startedAt + event.time.toMachTime() - offset
             mach_wait_until(deadline)
             
             // Return immediately if the thread has been cancelled
@@ -127,37 +127,19 @@ final class RaunchPlayerThread: Thread {
             }
             
             // Play the command
-            bluetooth.send(command)
+            bluetooth.send(event)
         }
     }
     
-    /// Moves the thread to the real time scheduling class.
-    private func moveToRealTimeSchedulingClass() {
+    /// Returns the first event that is in the future or nil.
+    private func nextEvent() -> RaunchEvent? {
+        var event: RaunchEvent? = nil
         
-        let threadTimeConstraintPolicyCount = MemoryLayout<thread_time_constraint_policy>.size / MemoryLayout<integer_t>.size
-        var policy = thread_time_constraint_policy(
-            period: 0,
-            computation: UInt32(5 * RaunchTimeInterval.clockToAbs),
-            constraint: UInt32(10 * RaunchTimeInterval.clockToAbs),
-            preemptible: 0
-        )
-        
-        _ = withUnsafeMutablePointer(to: &policy) {
-            $0.withMemoryRebound(to: integer_t.self, capacity: threadTimeConstraintPolicyCount) {
-                thread_policy_set(pthread_mach_thread_np(pthread_self()), thread_policy_flavor_t(THREAD_TIME_CONSTRAINT_POLICY), $0, mach_msg_type_number_t(threadTimeConstraintPolicyCount))
-            }
-        }
-    }
-    
-    /// Returns the first command that is in the future or nil.
-    private func nextCommand() -> RaunchCommand? {
-        var command: RaunchCommand? = nil
-        
-        while index < track.commands.count {
-            let cmd = track.commands[index]
+        while index < track.events.count {
+            let ev = track.events[index]
             let elapsedInMachTime = mach_absolute_time() - startedAt + offset
-            if cmd.time.toMachTime() > elapsedInMachTime {
-                command = cmd
+            if ev.time.toMachTime() > elapsedInMachTime {
+                event = ev
                 index = index + 1
                 break
             }
@@ -166,25 +148,7 @@ final class RaunchPlayerThread: Thread {
             }
         }
         
-        return command
-    }
-    
-}
-
-// Time utilities.
-fileprivate extension RaunchTimeInterval {
-    
-    /// Constant to use to convert from and from Mach time to absolute time in milliseconds.
-    /// See https://developer.apple.com/library/content/qa/qa1398/_index.html
-    static var clockToAbs: Int64 {
-        var info = mach_timebase_info(numer: 0, denom: 0)
-        mach_timebase_info(&info)
-        return Int64(Double(info.denom) / Double(info.numer) * 1000000)
-    }
-    
-    /// Converts from absolute time in millisecond to Mach time.
-    func toMachTime() -> UInt64 {
-        return UInt64(RaunchTimeInterval.clockToAbs * self.milliseconds)
+        return event
     }
     
 }

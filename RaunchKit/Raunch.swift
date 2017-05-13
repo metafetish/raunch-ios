@@ -25,7 +25,7 @@ public class Raunch {
     /// - Throws: `RaunchError.invalidPositionValue` if the position value is invalid.
     ///           `RaunchError.invalidSpeedValue` if the speed value is invalid.
     public static func position(_ position: Int, speed: Int) throws {
-        let command = try RaunchCommand(time: RaunchTimeInterval(milliseconds: 0), position: position, speed: speed) // Time does not matter as we'll send it immediately.
+        let command = try RaunchCommand(position: position, speed: speed) // Time does not matter as we'll send it immediately.
         bluetooth.send(command)
     }
     
@@ -36,4 +36,16 @@ public class Raunch {
         return RaunchPlayer(bluetooth: bluetooth, track: track)
     }
     
+    /// Return a stroke generator.
+    /// - Parameter period: The desired period between commands. Valid values are 150-2000.
+    /// - Parameter speed: The speed at which the toy should move. Valid values are 20-99.
+    /// - Parameter bottomPosition: The bottom position the generator should use.
+    /// - Parameter topPosition: The top position the generator use.
+    /// - Throws: `RaunchError.invalidPeriodValue` if the period valid is invalid.
+    ///           `RaunchError.invalidSpeedValue` if the speed value is invalid.
+    ///           `RaunchError.invalidPositionValue` if one or both of the position are invalid.
+    ///           `RaunchError.topPositionLessThanBottomPositiont` if the position are incorrect.
+    public static func generator(period: RaunchTimeInterval, speed: Int, bottomPosition: Int = 5, topPosition: Int = 95) throws -> RaunchGenerator {
+        return try RaunchGenerator(bluetooth: bluetooth, period: period, speed: speed, bottomPosition: bottomPosition, topPosition: topPosition)
+    }
 }

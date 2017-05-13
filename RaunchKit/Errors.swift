@@ -16,6 +16,12 @@ public enum RaunchError: Error {
     
     /// Speed value is not valid. Speed must be between 0 and 99.
     case invalidSpeedValue
+    
+    /// Period value is not valid. Speed must be between 150 and 2000.
+    case invalidPeriodValue
+    
+    /// Top position must be higher than bottom position.
+    case topPositionLessThanBottomPosition
 
 }
 
@@ -33,6 +39,10 @@ extension RaunchError: CustomNSError {
             return 1
         case .invalidSpeedValue:
             return 2
+        case .invalidPeriodValue:
+            return 3
+        case .topPositionLessThanBottomPosition:
+            return 4
         }
     }
     
@@ -42,6 +52,10 @@ extension RaunchError: CustomNSError {
             return "Position value is not valid. Position must be between 0 and 99."
         case .invalidSpeedValue:
             return "Speed value is not valid. Speed must be between 0 and 99."
+        case .invalidPeriodValue:
+            return "Period value is not valid. Period must be between 150 and 2000."
+        case .topPositionLessThanBottomPosition:
+            return "Top position must be higher than bottom position."
         }
     }
     
