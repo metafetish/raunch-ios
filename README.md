@@ -4,6 +4,28 @@
 
 Raunch is a library for controlling the Launch sex toy on iOS. The library allows developers to create applications that can control the speed and position of the device.
 
+## Usage
+
+```swift
+import RaunchKit
+
+// Start scanning and connect to the first available toy
+Raunch.start()
+
+// Send a command
+try Raunch.position(95, speed: 20)
+
+// Play a content track
+let content = "202.13:4,202.67:0,202.94:4,203.50:0,204.24:4,204.47:1,204.74:4,206.17:0,207.67:4"
+let track = RaunchTrack(miiyooTrack: MiiyooTrack(string: content))
+let player = Raunch.player(for: track)
+player.play()
+
+// Generate commands
+let generator = try Raunch.generator(period: RaunchTimeInterval(milliseconds: 500), speed: 50)
+generator.start()
+```
+
 ## Support The Project
 
 If you find this project helpful, you
